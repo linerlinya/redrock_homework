@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //解构赋值
+        const user = {
+            name: "John",
+            years: 30
+        };
+        var {name,years: age,isAdmin: isAdmin = 'false'} = user;
+        console.log(name);
+        console.log(age);
+        console.log(isAdmin);
+        // 循环计算
+        const sumTo = (n) =>{
+            var sum=0;
+            while(n)
+            {
+                sum+=n;
+                n--;
+            }
+            return sum;
+        }
+        console.log(sumTo(100));
+        //递归计算
+        const sumTo1 = (n) =>{
+            if(n<0)
+                return 0;
+            else
+                return n+sumTo1(n-1);
+        }
+        console.log(sumTo1(100));
+        //等差数列
+        const sumTo2 = (n) =>{
+            return n*(n+1)/2;
+        }
+        console.log(sumTo2(100));
+        //创建 new Accumulator
+        function Accumulator(startingValue){
+            this.value = startingValue;
+        }
+        Accumulator.prototype.read = function(n){
+            this.value += n;
+        }
+        var test1 = new Accumulator(1);
+        console.log(test1.value);
+        test1.read(1);
+        console.log(test1.value);
+        /*深拷贝  深度拷贝对象，在拷贝这个对象的时候如果这个对象的属性为一个数组或者对象，那么就要深度拷贝这个属性给新的对象或者数组的值，就进入了一个类似的循环，那么利用递归再适合不过，当这个属
+        性为基本类型就结束递归，*/
+        var test3 = {
+            name: 'lalala',
+            age: 19,
+            habit: ['paly','sleep'],
+            children: {
+                name: 'enenen',
+                age: 19
+            }
+        };
+        var deepCopy = (m) =>{
+            var n = (m instanceof Array)?[]:{}; 
+            for(var i in m)
+            {
+                if(typeof m[i]=='object')
+                {
+                    n[i] = deepCopy(m[i]);
+                }
+                else
+                {
+                    n[i] = m[i];
+                }
+            }
+            return n;
+        }
+        var test4 = deepCopy(test3);
+        console.log(test4);
+        test4.habit.push('learn');
+        console.log(test3.habit);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
