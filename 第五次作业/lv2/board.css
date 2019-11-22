@@ -1,0 +1,103 @@
+*{margin: 0px; padding: 0px;}
+html{height: 100%;}
+body{width: 100%; height: 100%;}
+.liuyanban{
+    overflow: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+    min-height: 284px;
+    background-color: #24639d;
+    width: 900px; 
+    padding: 0px 24px;
+    font-family: Tahoma;
+}
+.liuyan{
+    width: 100%;
+    height: 186px;
+    margin-top: 98px;
+    margin-bottom: 15px;
+}
+.liuyan p{
+    font-size: 14px;
+    width: 100%;
+    color: #EDEFF0;
+    line-height: 14px;
+    height: 14px;
+    font-weight: bold;
+}
+.lv2{
+    padding-top: 13px;
+    width: 100%;
+    height: 172px;
+    box-sizing: border-box;
+}
+.lv2 textarea{
+    width: 100%;
+    height: 125px;
+}
+.submit{
+    color: white;
+    width: 72px;
+    height: 28px;
+    box-sizing: border-box;
+    background: #46b2ef;
+    border: #3686B3 1px solid;
+    font-size: 14px;
+}
+.content-box{
+    font-size: 0px;
+    color: #EDEFF0;
+    width: 100%;
+}
+.content_head{
+    color: white;
+    font-size: 14px;
+    line-height: 14px;
+    padding-bottom: 11px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2374BF;
+}
+.content_main{
+    font-size: 0px;
+    color: #EDEFF0;
+    width: 100%;
+}
+.content{
+    font-size: 14px;
+    width: 100%;
+    height: 190px;
+    border-bottom: 1px solid #2374BF;
+    padding-left: 81px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    background: url('img/img.png') no-repeat 11px 20px;
+}
+.passername span{
+    display: inline-block;
+    margin-right: 45px;
+}
+.passername span:nth-child(1)
+{
+    color: #70CCFF;
+}
+.passername span:nth-child(2)
+{
+    font-size: 12px;
+    color: #8AB8E3;
+}
+.content_text{
+    margin-top: 13px;
+    font-size: 12px;
+    color: #EDEFF0;
+    height: 90px;
+    margin-bottom: 12px;
+}
+.content_foot{
+    font-size: 0px;
+    color: #70CCFF;
+}
+.content_foot span{
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 10px;
+}

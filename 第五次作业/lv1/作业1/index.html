@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+            background-color: #333333;
+        }
+        .test{
+            width: 200px; 
+            height: 200px; background: black; 
+            color: blue; 
+            margin: calc(25% - 100px) auto 0px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test">
+        <span>lalalalallalal</span>
+        <input type="button" value="改主题颜色">
+        <input type="button" value="改字体大小">
+    </div>
+    <script>
+        var test1 = document.getElementsByClassName('test')[0];
+        var fontSizeChange = test1.getElementsByTagName('input')[1];
+        var subjectChange = test1.getElementsByTagName('input')[0];
+        var subjectCss = document.styleSheets[0].cssRules[0];
+        var fontSzieCss = document.styleSheets[0].cssRules[1];
+        var seconds = 0;
+        subjectChange.onclick = function(){
+            seconds++;
+            if(seconds==3)
+                seconds=0;
+            if(seconds==0)
+            {
+                subjectCss.style.backgroundColor = '#'+333333;
+            }
+            else if(seconds==1)
+            {
+                subjectCss.style.backgroundColor = 'red';
+            }
+            else
+            {
+                subjectCss.style.backgroundColor = 'pink';
+            }
+        }
+        var seconds1 = 0;
+        fontSizeChange.onclick = function(){
+            seconds1++;
+            if(seconds1==3)
+                seconds1=0;
+            if(seconds1==0)
+            {
+                fontSzieCss.style.fontSize = 24 + 'px';
+            }
+            else if(seconds1==1)
+            {
+                fontSzieCss.style.fontSize = 35 + 'px';
+            }
+            else
+            {
+                fontSzieCss.style.fontSize = 40 + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
