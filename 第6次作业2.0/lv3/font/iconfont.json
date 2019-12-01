@@ -1,0 +1,16 @@
+{
+  "id": "1528582",
+  "name": "lv6",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10715439",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    }
+  ]
+}
