@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function showPlace(event){
+            console.log(event.pageX);
+        }
+        function debounce(func,delay){
+            let time = null;
+            return function(event){
+                if(time===null){
+                    time = setTimeout(()=>{
+                        func(event);
+                    },delay);
+                }
+                else{
+                    clearTimeout(time);
+                    time = setTimeout(()=>{
+                        func(event);
+                    },delay);
+                }
+            }
+        }
+        function throttle(func,delay){
+            let status = true;
+            return function(event){
+                if(status===false){
+
+                }
+                else{
+                    status = false;
+                    setTimeout(()=>{
+                        func(event);
+                        status = true;
+                    },delay);
+                }
+            }
+        }
+        document.onmousemove = throttle(showPlace,2000);
+        
+    </script>
+</body>
+</html>

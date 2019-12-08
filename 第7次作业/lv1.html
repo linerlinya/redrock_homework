@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Function.prototype.call2 = function(temp){
+      temp = temp||window;
+      let func = 'lkk';
+      if(typeof temp[func]!=='undefined'){
+        while(typeof temp[func]!=='undefined'){
+          func += '1';
+        }
+      }//避免覆盖原对象同名方法或者属性
+      let args = [];
+      for(let i=1;i<arguments.length;i++){
+        args.push(arguments[i]);
+      }
+      temp[func] = this;
+      temp[func](...args);
+    }
+    function sayInfo(age) {
+        console.log("name:"+this.name)
+        console.log("age:"+age)
+    }
+    var user = {
+        name: "zzx",
+    }
+    sayInfo.call2(user,19);
+  </script>
+</body>
+</html>
