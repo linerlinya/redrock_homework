@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+ 
+    </style>
+</head>
+<body>
+   <div id="uploadFile">
+       <input type="file" id='upload'>
+       <input type="button" id='submit'>
+   </div>
+    <script>
+        let submitButton = document.getElementById('submit');
+        submitButton.addEventListener('click',function(){
+            let upLoad = document.getElementById('upload');
+            if(upLoad.files.length===0){
+                alert('please chose one file');
+            }else{
+                let fileData = new FormData();
+                fileData.append('newFile',upLoad.files[0]);
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState===4){
+                        if(xhr.status>=200&&xhr.status<300||xhr.status===304){
+                            alert(xhr.responseText);
+                        }
+                    }
+                }
+                xhr.open('POST','http://localhost:3000/');
+                xhr.send(fileData);
+            }
+        })
+    </script>
+</body>
+</html>

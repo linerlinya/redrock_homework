@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>目前上传的文件有：</p>
+    <ul class="uploadFile">
+    </ul>
+    <script>
+        class FindNewFile{
+            constructor(fileListDOM,path,url){
+                this.timeId = null;
+                this.a = 1;
+                this.fileListDOM = fileListDOM||null;
+                this.relativePath = path||null;
+                this.url = url||null;
+            }
+            findFile(){
+                this.timeId = setInterval(() => {
+                    let xhr = new XMLHttpRequest();
+                    let that = this;
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState===4){
+                            if(xhr.status>=200&&xhr.status<300){
+                                let fileList = xhr.responseText.split(',');
+                                let temp = document.createDocumentFragment();
+                                fileList.forEach(value=>{
+                                    let tempLi = document.createElement('li');
+                                    let tempA = document.createElement('a');
+                                    tempA.innerText = value;
+                                    tempA.setAttribute('href','/resource/'+value);
+                                    tempLi.appendChild(tempA);
+                                    temp.appendChild(tempLi);
+                                })
+                                that.fileListDOM.appendChild(temp);
+                            }
+                            else{
+                                console.log('no new file');
+                            }
+                        }
+                    }
+                    xhr.open('GET',this.url+'?name=findNewFile');
+                    xhr.send(null);
+                }, 500);
+            }
+        }
+        let test = new FindNewFile(document.querySelector('.uploadFile'),'../load/','http://localhost:3000/');
+        test.findFile();
+    </script>
+</body>
+</html>

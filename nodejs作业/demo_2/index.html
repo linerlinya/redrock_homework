@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .chat{
+            width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        #content{
+            width: 100%;
+            height: 400px;
+            background-color: bisque;
+        }
+        #cin{
+            width: 100%;
+            height: 50px;
+            margin-top: -5px;
+        }
+        #cout{
+            position: absolute;
+            bottom: 0px;
+            right: -2px;
+        }
+        #user{
+            margin: 0 auto;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat">
+        <textarea name="" id="content" readonly></textarea>
+        <input type="text" name="" id="cin">
+        <button id="cout">发送</button>    
+    </div>
+    <div id="user">
+        <input type="text" id="userId">
+        <button class="jinlai">加入</button>
+        <button class="tuichu">退出</button>
+    </div>
+    <script>
+        class Chat{
+            constructor(contentDOM=document.getElementById('content')){
+                this.client = null;
+                this.user = null;
+                this.status = false;
+                this.contentDOM = contentDOM;
+                this.userDOM = document.getElementById('user');
+                this.userIdDOM = document.getElementById('userId');
+                this.jinlaiDOM = document.querySelector('.jinlai');
+                this.chuquDOM = document.querySelector('.tuichu');
+                this.sendDOM = document.getElementById('cout');
+                this.messageDOM = document.getElementById('cin');
+            }
+            start(){
+                this.client = new WebSocket('ws://localhost:3000');
+                let that = this;
+                this.client.addEventListener('open',function(){
+                    let temp = {
+                        type: 1,
+                        user: that.user
+                    }
+                    that.client.send(JSON.stringify(temp));
+                })
+                this.client.addEventListener('message',function(event){
+                    that.contentDOM.value += event.data;
+                })
+            }
+            close(){
+                this.client.close(400,'liuleliule');
+            }
+            joinAndLeave(){
+                let that = this;
+                this.userDOM.addEventListener('click',function(event){
+                    if(event.target===that.jinlaiDOM){
+                        if(that.userIdDOM.value===''){
+                            alert('please input your name');
+                        }else{
+                            that.user = that.userIdDOM.value;
+                            that.start();
+                        }
+                    }else if(event.target===that.chuquDOM){
+                        let temp = {
+                            type:2,
+                            user:that.user
+                        }
+                        that.client.send(JSON.stringify(temp));
+                        that.close();
+                    }else{
+                        console.log('nothing');
+                    }
+                })
+            }
+            sendMessage(){
+                let that = this;
+                this.sendDOM.addEventListener('click',function(){
+                    if(that.messageDOM.value===''){
+                        alert('you cant send nothing');
+                    }else if(that.user===null){
+                        alert('you need a name');
+                    }
+                    else{
+                        let temp = {
+                            type: 3,
+                            user: that.user,
+                            value: that.messageDOM.value
+                        }
+                        that.client.send(JSON.stringify(temp));
+                        that.messageDOM.value = '';
+                    }
+                })
+            }
+            qidong(){
+                this.joinAndLeave();
+                this.sendMessage();
+            }
+        }
+        let test = new Chat();
+        test.qidong();
+    </script>
+</body>
+</html>
